@@ -1,0 +1,20 @@
+{
+    "name": "mohammadreza/micro-framework",
+    "description": "Micro-Framework Project",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mohammadreza-73",
+            "email": "mohammadreza.rahimi93@yahoo.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        }
+    }
+}
