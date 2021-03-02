@@ -7,4 +7,4 @@
  * declare constants which are not need to change for
  * another environment
  */
-define('BASE_PATH', __DIR__ . '/../');
+define('BASE_PATH', realpath(__DIR__ . '/../'));
