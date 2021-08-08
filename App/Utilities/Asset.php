@@ -9,8 +9,8 @@ class Asset
         return $_ENV['BASE_URL'] . 'assets/' . $route;
     }
 
-    public static function __callStatic(string $route, array $args): string
+    public static function __callStatic(string $file_name, array $route): string
     {
-        return $_ENV['BASE_URL'] . "assets/$route/";
+        return $_ENV['BASE_URL'] . "assets/$file_name/" . implode('', $route);
     }
 }
