@@ -3,15 +3,20 @@
 namespace App\Core;
 class Request
 {
-    private array $reguest_data = [];
+    private array $request_data = [];
 
+    /**
+     * Initialize `request_data` Property.
+     * 
+     * @return void
+     */
     public function __construct()
     {
-        $this->reguest_data['method'] = strtolower($_SERVER['REQUEST_METHOD']);
-        $this->reguest_data['agent']  = $_SERVER['HTTP_USER_AGENT'];
-        $this->reguest_data['ip']     = $_SERVER['REMOTE_ADDR'];
-        $this->reguest_data['uri']    = strtok($_SERVER['REQUEST_URI'], '?');
-        $this->reguest_data['params'] = $_REQUEST;
+        $this->request_data['method'] = strtolower($_SERVER['REQUEST_METHOD']);
+        $this->request_data['agent']  = $_SERVER['HTTP_USER_AGENT'];
+        $this->request_data['ip']     = $_SERVER['REMOTE_ADDR'];
+        $this->request_data['uri']    = strtok($_SERVER['REQUEST_URI'], '?');
+        $this->request_data['params'] = $_REQUEST;
     }
 
     /**
@@ -21,33 +26,37 @@ class Request
      */
     public function getRequestData(): array
     {
-        return $this->reguest_data;
+        return $this->request_data;
     }
 
     /**
-     * Return every index of Property. include GET & POST parameters
+     * Return index of `request_data` Property.
+     * include GET & POST parameters
      *
-     * @param string $key
-     * @param string $params_key GET & POST parameters
-     * @return string
+     * @param  string $key
+     * @param  string $params_key GET & POST parameters
+     * @return array|string|null
      */
-    public function getRequestInput(string $key, string $params_key = null): string
+    public function getRequestParams(string $key = 'params', string $params_key = null)
     {
         if ( isset($params_key) )
-            return $this->reguest_data['params'][$params_key] ?? null;
+            return $this->request_data[$key][$params_key] ?? null;
 
-        return $this->reguest_data[$key] ?? null;
+        return $this->request_data[$key] ?? null;
     }
 
     /**
-     * check parameter is set
+     * Determind Parameters existance
      *
-     * @param string $key
+     * @param  string $key
      * @return boolean
      */
-    public function isset(string $key): bool
+    public function isset(string $key = 'params', string $params_key = null): bool
     {
-        return isset($this->reguest_data[$key]);
+        if ( isset($params_key) )
+            return $this->request_data[$key][$params_key] ?? false;
+        
+        return isset($this->request_data[$key]);
     }
 
     /**
@@ -55,7 +64,7 @@ class Request
      * 
      * NOTE: this is not for redirecting to url
      *
-     * @param string $route
+     * @param  string $route
      * @return void
      */
     public function redirect(string $route): void
@@ -67,11 +76,11 @@ class Request
     /**
      * Get Inaccessible Property
      *
-     * @param string $name
+     * @param  string $name
      * @return mixed
      */
-    public function __get(string $name)
+    public function __get(string $key)
     {
-        return $this->getRequestInput('', $name);
+        return $this->getRequestParams($key);
     }
 }
