@@ -31,3 +31,7 @@ Route::get('/archive/products', 'ArchiveController@products');
 Route::get('/archive/articles', 'ArchiveController@articles');
 
 Route::get('/todo/list', 'TodoController@list');
+
+Route::any('/test', function() {
+    echo 'test route';
+});
