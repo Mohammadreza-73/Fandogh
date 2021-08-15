@@ -47,7 +47,7 @@ class Router
 
     public function run()
     {
-        // $this->invalidRequest($this->request);
+        $this->invalidRequestMehtod($this->request);
 
         if ( null === $this->findRoute($this->request) )
             $this->dispatch404();
@@ -55,15 +55,13 @@ class Router
         $this->dispatch($this->currentRoute);
     }
 
-    private function invalidRequest(Request $request)
+    private function invalidRequestMehtod(Request $request)
     {
         foreach ($this->routes as $route) {
-            if ( null !== $this->findRoute($this->request) )
+            if ( $request->uri === $route['route'] && 
+                ! in_array($request->method, $route['methods']) )
             {
-                if (! in_array($request->method, $route['methods']) )
-                {
-                    $this->dispatch405();
-                }
+                $this->dispatch405();
             }
         }
     }
