@@ -1,6 +1,7 @@
 <?php
 
 use App\Core\Routing\Route;
+use App\Middleware\BlockFirefox;
 
 Route::add(['get', 'post'], '/auth', function () {
     echo 'Hello';
@@ -30,7 +31,7 @@ Route::get('/archive/products', 'ArchiveController@products');
 
 Route::get('/archive/articles', 'ArchiveController@articles');
 
-Route::get('/todo/list', 'TodoController@list');
+Route::get('/todo/list', 'TodoController@list', [BlockFirefox::class]);
 
 Route::any('/test', function() {
     echo 'test route';

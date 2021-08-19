@@ -15,12 +15,18 @@ class Route
      * @param  array|string $methods
      * @param  string       $route
      * @param  closure      $action
+     * @param  array        $middleware
      * @return void
      */
-    public static function add($methods, string $route, $action = null): void
+    public static function add($methods, string $route, $action = null, array $middleware = []): void
     {
         $methods = is_array($methods) ? $methods : [$methods];   // Standardize method
-        self::$routes[] = ['methods' => $methods, 'route' => $route, 'action' => $action];
+        self::$routes[] = [
+            'methods'    => $methods,
+            'route'      => $route,
+            'action'     => $action,
+            'middleware' => $middleware
+        ];
     }
 
     /**
@@ -28,11 +34,12 @@ class Route
      *
      * @param  string   $route
      * @param  closure  $action
+     * @param  array    $middleware
      * @return void
      */
-    public static function get(string $route, $action = null): void
+    public static function get(string $route, $action = null, array $middleware = []): void
     {
-        self::add('get', $route, $action);
+        self::add('get', $route, $action, $middleware);
     }
 
     /**
@@ -40,11 +47,12 @@ class Route
      *
      * @param  string  $route
      * @param  closure $action
+     * @param  array   $middleware
      * @return void
      */
-    public static function post(string $route, $action = null): void
+    public static function post(string $route, $action = null, array $middleware = []): void
     {
-        self::add('post', $route, $action);
+        self::add('post', $route, $action, $middleware);
     }
 
     /**
@@ -52,11 +60,12 @@ class Route
      *
      * @param  string  $route
      * @param  closure $action
+     * @param  array   $middleware
      * @return void
      */
-    public static function put(string $route, $action = null): void
+    public static function put(string $route, $action = null, array $middleware = []): void
     {
-        self::add('put', $route, $action);
+        self::add('put', $route, $action, $middleware);
     }
 
     /**
@@ -64,11 +73,12 @@ class Route
      *
      * @param  string  $route
      * @param  closure $action
+     * @param  array   $middleware
      * @return void
      */
-    public static function patch(string $route, $action = null): void
+    public static function patch(string $route, $action = null, array $middleware = []): void
     {
-        self::add('patch', $route, $action);
+        self::add('patch', $route, $action, $middleware);
     }
 
     /**
@@ -76,11 +86,12 @@ class Route
      *
      * @param  string  $route
      * @param  closure $action
+     * @param  array   $middleware
      * @return void
      */
-    public static function delete(string $route, $action = null): void
+    public static function delete(string $route, $action = null, array $middleware = []): void
     {
-        self::add('delete', $route, $action);
+        self::add('delete', $route, $action, $middleware);
     }
 
     /**
@@ -88,11 +99,12 @@ class Route
      *
      * @param  string  $route
      * @param  closure $action
+     * @param  array   $middleware
      * @return void
      */
-    public static function options(string $route, $action = null): void
+    public static function options(string $route, $action = null, array $middleware = []): void
     {
-        self::add('options', $route, $action);
+        self::add('options', $route, $action, $middleware);
     }
 
     /**
@@ -100,11 +112,12 @@ class Route
      *
      * @param string  $route
      * @param closure $action
+     * @param  array  $middleware
      * @return void
      */
-    public static function any(string $route, $action = null): void
+    public static function any(string $route, $action = null, array $middleware = []): void
     {
-        self::add(['get', 'post', 'put', 'patch', 'options', 'delete'], $route, $action);
+        self::add(['get', 'post', 'put', 'patch', 'options', 'delete'], $route, $action, $middleware);
     }
     
     /**
