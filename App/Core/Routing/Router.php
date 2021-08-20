@@ -8,8 +8,25 @@ use App\Core\Routing\Route;
 
 class Router
 {
+    /**
+     * Http Request
+     *
+     * @var Request
+     */
     private Request $request;
+
+    /**
+     * Defined Routes
+     *
+     * @var array
+     */
     private array $routes;
+
+    /**
+     * Matches Route
+     *
+     * @var array|null
+     */
     private $currentRoute;
 
     private const BASE_CONTROLLER = 'App\Controllers\\';
@@ -45,7 +62,12 @@ class Router
         return null;
     }
 
-    public function run()
+    /**
+     * Execute Router
+     *
+     * @return void
+     */
+    public function run(): void
     {
         $this->invalidRequestMehtod($this->request);
 
@@ -55,7 +77,13 @@ class Router
         $this->dispatch($this->currentRoute);
     }
 
-    private function invalidRequestMehtod(Request $request)
+    /**
+     * Determine Request Method
+     *
+     * @param Request $request
+     * @return void
+     */
+    private function invalidRequestMehtod(Request $request): void
     {
         foreach ($this->routes as $route) {
             if ( $request->uri === $route['route'] && 
@@ -66,37 +94,53 @@ class Router
         }
     }
 
-    private function dispatch405()
+    /**
+     * Dispatch 405 view
+     *
+     * @return void
+     */
+    private function dispatch405(): void
     {
         header("HTTP/1.1 405 Method Not Allowed");
         view('errors.405');
     }
 
-    private function dispatch404()
+    /**
+     * Dispatch 404 view
+     *
+     * @return void
+     */
+    private function dispatch404(): void
     {
         header("HTTP/1.1 404 Not Found");
         view('errors.404');
     }
 
-    private function dispatch(?array $route)
+    /**
+     * Dispatch Request
+     *
+     * @param array|null $route
+     * @return void
+     */
+    private function dispatch(?array $route): void
     {
         $action = $route['action'] ?? null;
 
-        # action: null
+        /**  action: null */
         if ( is_null($action) || empty($action) )
             return;
 
-        # action: closure
+        /** action: closure */
         if ( is_callable($action) ) {
             $action();
             // call_user_func($action);
         }
         
-        # action: 'controller@method'
+        /** action: 'controller@method' */
         if ( is_string($action) )
             $action = explode('@', $action);
 
-        # action: ['controller', 'method']
+        /** action: ['controller', 'method'] */
         if ( is_array($action) ) {
             $className = self::BASE_CONTROLLER . $action[0];
             $method = $action[1];
