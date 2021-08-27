@@ -5,6 +5,7 @@ namespace App\Core\Routing;
 use Exception;
 use App\Core\Request;
 use App\Core\Routing\Route;
+use App\Middleware\Global\GlobalMiddleware;
 
 class Router
 {
@@ -41,6 +42,10 @@ class Router
         $this->request = new Request();
         $this->routes = Route::getRoutes();
         $this->currentRoute = $this->findRoute($this->request);
+
+        /** Middlewares */
+         $this->middleware();
+         $this->globalMiddleware();
     }
 
     /**
@@ -75,6 +80,43 @@ class Router
             $this->dispatch404();
 
         $this->dispatch($this->currentRoute);
+    }
+
+    /**
+     * Determines Global Middlewares
+     *
+     * @return void
+     */
+    private function globalMiddleware(): void
+    {
+        $globals = new GlobalMiddleware();
+        $globals->handle();
+    }
+
+    /**
+     * Determines Middlewares
+     *
+     * @throws Exception Route Existance
+     * @throws Exception Class and method existance
+     * @return void
+     */
+    private function middleware(): void
+    {
+        if ( null === $this->currentRoute )
+            throw new Exception('Current Route Not Exists');
+
+        $middlewares = $this->currentRoute['middleware'];
+        foreach ($middlewares as $middleware) {
+            if (! class_exists($middleware) )
+                throw new Exception("Middleware [$middleware] Not Exists");
+
+            $className = new $middleware;
+
+            if (! method_exists($className, 'handle') )
+                throw new Exception("Middleware should implements `MiddlewareInterface`");
+
+            $className->handle();
+        }
     }
 
     /**
