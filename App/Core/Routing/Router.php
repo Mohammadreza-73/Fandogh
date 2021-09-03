@@ -102,9 +102,6 @@ class Router
      */
     private function middleware(): void
     {
-        if ( null === $this->currentRoute )
-            throw new Exception('Current Route Not Exists');
-
         $middlewares = $this->currentRoute['middleware'];
         foreach ($middlewares as $middleware) {
             if (! class_exists($middleware) )

@@ -3,23 +3,11 @@
 use App\Core\Routing\Route;
 use App\Middleware\BlockFirefox;
 
-Route::add(['get', 'post'], '/auth', function () {
-    echo 'Hello';
+Route::get('/', function () {
+    echo 'Welcome Page';
 });
 
 Route::add(['get'], '/null');
-
-Route::add(['post'], '/enroll', function () {
-    echo 'Hello';
-});
-
-Route::get('/greeting', function () {
-    echo 'Hello from greeting';
-});
-
-Route::post('/saveForm', function () {
-    echo 'Form submit';
-});
 
 Route::get('/', ['HomeController', 'index']);
 
@@ -33,6 +21,6 @@ Route::get('/archive/articles', 'ArchiveController@articles');
 
 Route::get('/todo/list', 'TodoController@list', [BlockFirefox::class]);
 
-Route::any('/test', function() {
+Route::any('/test', function () {
     echo 'test route';
 });
