@@ -31,12 +31,12 @@ class GlobalMiddleware implements MiddlewareInterface
             if (! class_exists($middleware) )
                 throw new Exception("Middleware [$middleware] Not Exists");
 
-            $className = new $middleware;
+            $globalMiddleware = new $middleware();
         
-            if (! method_exists($className, 'handle') )
+            if (! method_exists($globalMiddleware, 'handle') )
                 throw new Exception('Middleware should implements `GlobalMiddleware` interface');
 
-            $className->handle();
+            $globalMiddleware->handle();
         }
     }
 }

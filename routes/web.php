@@ -9,9 +9,11 @@ Route::get('/', function () {
 
 Route::add(['get'], '/null');
 
-Route::get('/', ['HomeController', 'index']);
+Route::get('/home', ['HomeController', 'index']);
 
-Route::get('/home', 'HomeController@order');
+Route::get('/post/{slug}', 'PostController@single');
+
+Route::get('/order', 'HomeController@order');
 
 Route::get('/archive', 'ArchiveController@index');
 

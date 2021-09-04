@@ -10,5 +10,5 @@ $dotenv->load();
 /** Request Object */
 $request = new \App\Core\Request();
 
-include BASE_PATH . "/helpers/url-helpers.php";
+include BASE_PATH . "/helpers/helpers.php";
 include BASE_PATH . "/routes/web.php";

@@ -54,14 +54,14 @@ class Router
      * @param  Request $request
      * @return array   $route|null
      */
-    public function findRoute(Request $request): ?array
+    public function findRoute(Request $request)
     {
         foreach ($this->routes as $route) {
-            if ( in_array($request->method, $route['methods']) &&
-                            $request->uri === $route['route'] )
-            {
+            if (! in_array($request->method, $route['methods']) )
+                return null;
+
+            if ( $this->isUriMatched($route) )
                 return $route;
-            }
         }
         
         return null;
@@ -80,6 +80,13 @@ class Router
             $this->dispatch404();
 
         $this->dispatch($this->currentRoute);
+    }
+
+    private function isUriMatched(array $route)
+    {
+        $pattern = '/^' . str_replace(['/', '{', '}'], ['\/', '(?<', '>[-%\w]+)'], $route['route']) . '$/';
+
+        return preg_match($pattern, $this->request->uri) ? true : false ;
     }
 
     /**
@@ -185,12 +192,12 @@ class Router
             $method = $action[1];
 
             if (! class_exists($className) )
-                throw new Exception("Class $className Not Exists!");
+                throw new Exception("Class [$className] Not Exists!");
             
             $controller = new $className();
 
             if (! method_exists($className, $method) )
-                throw new Exception("Method $method Not Exists in Class $className!");
+                throw new Exception("Method [$method] Not Exists in Class $className!");
 
             $controller->{$method}();
         }

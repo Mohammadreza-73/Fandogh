@@ -23,3 +23,9 @@ function view(string $path, array $data = []): void
     include BASE_PATH . "/views/{$path}.php";
     die();
 }
+
+function dd($value)
+{
+    var_dump($value);
+    die();
+}
