@@ -1,31 +1,77 @@
 <?php
 
-function siteUrl(string $route)
+if (! function_exists('siteUrl') )
 {
-    return $_ENV['BASE_URL'] . $route;
+    /**
+     * Generate Custom URL
+     *
+     * @param  string $route
+     * @return string
+     */
+    function siteUrl(string $route): string
+    {
+        return $_ENV['BASE_URL'] . $route;
+    }
 }
 
-function assetsUrl(string $route)
+if (! function_exists('assetsUrl') )
 {
-    return siteUrl('/assets' . $route);
+    /**
+     * Retrieve asset URL
+     *
+     * @param  string $route
+     * @return string
+     */
+    function assetsUrl(string $route): string
+    {
+        return siteUrl('/assets' . $route);
+    }
 }
 
-function randomElement(array $array)
+if (! function_exists('randomElement') )
 {
-    shuffle($array);
-    return array_pop($array);
+    /**
+     * Retrieve random index of array
+     *
+     * @param  array $array
+     * @return string
+     */
+    function randomElement(array $array): string
+    {
+        shuffle($array);
+        return array_pop($array);
+    }
 }
 
-function view(string $path, array $data = []): void
+if (! function_exists('view') )
 {
-    extract($data);
-    $path = str_replace('.', '/', $path);
-    include BASE_PATH . "/views/{$path}.php";
-    die();
+    /**
+     * Get the evaluated view contents for the given view.
+     * 
+     * @param  string $path
+     * @param  array  $data  Accessible variables in view
+     * @return void
+     */
+    function view(string $path, array $data = []): void
+    {
+        extract($data);
+        $path = str_replace('.', '/', $path);
+        include BASE_PATH . "/views/{$path}.php";
+        die();
+    }
 }
 
-function dd($value)
+if (! function_exists('dd') )
 {
-    var_dump($value);
-    die();
+    /**
+     * Die and Dump
+     *
+     * @param  mixed $value
+     * @return void
+     */
+    function dd($value)
+    {
+        var_dump($value);
+        die();
+    }
 }
