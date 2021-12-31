@@ -5,6 +5,8 @@ namespace App\Core\Routing;
 use Exception;
 use App\Core\Request;
 use App\Core\Routing\Route;
+use App\Exceptions\ClassNotFoundException;
+use App\Exceptions\MethodNotFoundException;
 use App\Middleware\Global\GlobalMiddleware;
 
 class Router
@@ -119,8 +121,8 @@ class Router
     /**
      * Determines Middlewares
      *
-     * @throws Exception Route Existance
-     * @throws Exception Class and method existance
+     * @throws ClassNotFoundException  Class Existance
+     * @throws MethodNotFoundException Method existance
      * @return void
      */
     private function middleware(): void
@@ -130,12 +132,12 @@ class Router
         $middlewares = $this->currentRoute['middleware'];
         foreach ($middlewares as $middleware) {
             if (! class_exists($middleware) )
-                throw new Exception("Middleware [$middleware] Not Exists");
+                throw new ClassNotFoundException("Middleware [$middleware] Not Exists");
 
             $className = new $middleware();
 
             if (! method_exists($className, 'handle') )
-                throw new Exception("Middleware should implements `MiddlewareInterface`");
+                throw new MethodNotFoundException("Middleware should implements `MiddlewareInterface`");
 
             $className->handle();
         }
@@ -183,7 +185,9 @@ class Router
     /**
      * Dispatch Request
      *
-     * @param array|null $route
+     * @param  array|null $route
+     * @throws ClassNotFoundException  Class Existance
+     * @throws MethodNotFoundException Method existance
      * @return void
      */
     private function dispatch(?array $route, array $parameters = []): void
@@ -210,12 +214,12 @@ class Router
             $method = $action[1];
 
             if (! class_exists($className) )
-                throw new Exception("Class [$className] Not Exists!");
+                throw new ClassNotFoundException("Class [$className] Not Exists!");
             
             $controller = new $className();
 
             if (! method_exists($className, $method) )
-                throw new Exception("Method [$method] Not Exists in Class $className!");
+                throw new MethodNotFoundException("Method [$method] Not Exists in Class $className!");
 
             $controller->{$method}($this->parameters);
         }
