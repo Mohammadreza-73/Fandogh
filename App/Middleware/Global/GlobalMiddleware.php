@@ -5,6 +5,8 @@ namespace App\Middleware\Global;
 use Exception;
 use App\Middleware\BlockIE;
 use App\Middleware\BlockFirefox;
+use App\Exceptions\ClassNotFoundException;
+use App\Exceptions\MethodNotFoundException;
 use App\Middleware\Contract\MiddlewareInterface;
 
 class GlobalMiddleware implements MiddlewareInterface
@@ -29,12 +31,12 @@ class GlobalMiddleware implements MiddlewareInterface
     {
         foreach ($this->middlewares as $middleware) {
             if (! class_exists($middleware) )
-                throw new Exception("Middleware [$middleware] Not Exists");
+                throw new ClassNotFoundException("Middleware [$middleware] Not Exists");
 
             $globalMiddleware = new $middleware();
         
             if (! method_exists($globalMiddleware, 'handle') )
-                throw new Exception('Middleware should implements `GlobalMiddleware` interface');
+                throw new MethodNotFoundException('Middleware should implements `GlobalMiddleware` interface');
 
             $globalMiddleware->handle();
         }
