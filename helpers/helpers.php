@@ -54,6 +54,11 @@ if (! function_exists('view') )
      */
     function view(string $path, array $data = []): void
     {
+        if (! file_exists($path) )
+            throw new \App\Exceptions\FileNotFoundException(
+                "Failed to open stream, No such file or directory for view [$path]"
+            );
+
         extract($data);
         $path = str_replace('.', '/', $path);
         include BASE_PATH . "/views/{$path}.php";
