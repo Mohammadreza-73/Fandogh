@@ -125,6 +125,8 @@ class Router
      */
     private function middleware(): void
     {
+        if (null === $this->currentRoute) return;
+
         $middlewares = $this->currentRoute['middleware'];
         foreach ($middlewares as $middleware) {
             if (! class_exists($middleware) )
