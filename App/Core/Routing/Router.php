@@ -30,6 +30,8 @@ class Router
      */
     private $currentRoute;
 
+    private $parameters = [];
+
     private const BASE_CONTROLLER = 'App\Controllers\\';
 
     /**
@@ -54,7 +56,7 @@ class Router
      * @param  Request $request
      * @return array   $route|null
      */
-    public function findRoute(Request $request)
+    public function findRoute(Request $request): ?array
     {
         foreach ($this->routes as $route) {
             if (! in_array($request->method, $route['methods']) )
@@ -76,17 +78,31 @@ class Router
     {
         $this->invalidRequestMehtod($this->request);
 
-        if ( null === $this->findRoute($this->request) )
+        if ( null === $this->currentRoute )
             $this->dispatch404();
 
-        $this->dispatch($this->currentRoute);
+        $this->dispatch($this->currentRoute, $this->parameters);
     }
 
-    private function isUriMatched(array $route)
+    private function isUriMatched(array $route): bool
     {
-        $pattern = '/^' . str_replace(['/', '{', '}'], ['\/', '(?<', '>[-%\w]+)'], $route['route']) . '$/';
+        $pattern = '/^' . str_replace(['/', '{', '}'], ['\/', '(?<', '>[-%\w]+)'], $route['uri']) . '$/';
+        $result = preg_match($pattern, $this->request->uri, $matches);
 
-        return preg_match($pattern, $this->request->uri) ? true : false ;
+        if (!$result)
+            return false;
+        
+        foreach ($matches as $key => $value)
+        {
+            if (! is_int($key) ) {
+                # Which controller is
+                # Make instance from specific controller
+                # Pass variable to method
+                $this->dispatch($this->currentRoute, [$this->parameters]);
+            }
+        }
+
+        return true;
     }
 
     /**
@@ -114,7 +130,7 @@ class Router
             if (! class_exists($middleware) )
                 throw new Exception("Middleware [$middleware] Not Exists");
 
-            $className = new $middleware;
+            $className = new $middleware();
 
             if (! method_exists($className, 'handle') )
                 throw new Exception("Middleware should implements `MiddlewareInterface`");
@@ -132,7 +148,7 @@ class Router
     private function invalidRequestMehtod(Request $request): void
     {
         foreach ($this->routes as $route) {
-            if ( $request->uri === $route['route'] && 
+            if ( $request->uri === $route['uri'] && 
                 ! in_array($request->method, $route['methods']) )
             {
                 $this->dispatch405();
@@ -168,7 +184,7 @@ class Router
      * @param array|null $route
      * @return void
      */
-    private function dispatch(?array $route): void
+    private function dispatch(?array $route, array $parameters = []): void
     {
         $action = $route['action'] ?? null;
 
@@ -178,7 +194,7 @@ class Router
 
         /** action: closure */
         if ( is_callable($action) ) {
-            $action();
+            $action($this->parameters);
             // call_user_func($action);
         }
         
@@ -199,7 +215,7 @@ class Router
             if (! method_exists($className, $method) )
                 throw new Exception("Method [$method] Not Exists in Class $className!");
 
-            $controller->{$method}();
+            $controller->{$method}($this->parameters);
         }
     }
 }

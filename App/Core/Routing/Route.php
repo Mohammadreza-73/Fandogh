@@ -13,17 +13,17 @@ class Route
      * Add Routes
      *
      * @param  array|string $methods
-     * @param  string       $route
+     * @param  string       $uri
      * @param  closure      $action
      * @param  array        $middleware
      * @return void
      */
-    public static function add($methods, string $route, $action = null, array $middleware = []): void
+    public static function add($methods, string $uri, $action = null, array $middleware = []): void
     {
         $methods = is_array($methods) ? $methods : [$methods];   // Standardize method
         self::$routes[] = [
             'methods'    => $methods,
-            'route'      => $route,
+            'uri'        => $uri,
             'action'     => $action,
             'middleware' => $middleware
         ];
@@ -32,92 +32,92 @@ class Route
     /**
      * Add Route with GET Method
      *
-     * @param  string   $route
+     * @param  string   $uri
      * @param  closure  $action
      * @param  array    $middleware
      * @return void
      */
-    public static function get(string $route, $action = null, array $middleware = []): void
+    public static function get(string $uri, $action = null, array $middleware = []): void
     {
-        self::add('get', $route, $action, $middleware);
+        self::add('get', $uri, $action, $middleware);
     }
 
     /**
      * Add Route with POST Method
      *
-     * @param  string  $route
+     * @param  string  $uri
      * @param  closure $action
      * @param  array   $middleware
      * @return void
      */
-    public static function post(string $route, $action = null, array $middleware = []): void
+    public static function post(string $uri, $action = null, array $middleware = []): void
     {
-        self::add('post', $route, $action, $middleware);
+        self::add('post', $uri, $action, $middleware);
     }
 
     /**
      * Add Route with PUT Method
      *
-     * @param  string  $route
+     * @param  string  $uri
      * @param  closure $action
      * @param  array   $middleware
      * @return void
      */
-    public static function put(string $route, $action = null, array $middleware = []): void
+    public static function put(string $uri, $action = null, array $middleware = []): void
     {
-        self::add('put', $route, $action, $middleware);
+        self::add('put', $uri, $action, $middleware);
     }
 
     /**
      * Add Route with PATCH Method
      *
-     * @param  string  $route
+     * @param  string  $uri
      * @param  closure $action
      * @param  array   $middleware
      * @return void
      */
-    public static function patch(string $route, $action = null, array $middleware = []): void
+    public static function patch(string $uri, $action = null, array $middleware = []): void
     {
-        self::add('patch', $route, $action, $middleware);
+        self::add('patch', $uri, $action, $middleware);
     }
 
     /**
      * Add Route with DELETE Method
      *
-     * @param  string  $route
+     * @param  string  $uri
      * @param  closure $action
      * @param  array   $middleware
      * @return void
      */
-    public static function delete(string $route, $action = null, array $middleware = []): void
+    public static function delete(string $uri, $action = null, array $middleware = []): void
     {
-        self::add('delete', $route, $action, $middleware);
+        self::add('delete', $uri, $action, $middleware);
     }
 
     /**
      * Add Route with OPTIONS Method
      *
-     * @param  string  $route
+     * @param  string  $uri
      * @param  closure $action
      * @param  array   $middleware
      * @return void
      */
-    public static function options(string $route, $action = null, array $middleware = []): void
+    public static function options(string $uri, $action = null, array $middleware = []): void
     {
-        self::add('options', $route, $action, $middleware);
+        self::add('options', $uri, $action, $middleware);
     }
 
     /**
      * Add Route with all Methods
      *
-     * @param string  $route
-     * @param closure $action
+     * @param  string  $uri
+     * @param  closure $action
      * @param  array  $middleware
      * @return void
      */
-    public static function any(string $route, $action = null, array $middleware = []): void
+    public static function any(string $uri, $action = null, array $middleware = []): void
     {
-        self::add(['get', 'post', 'put', 'patch', 'options', 'delete'], $route, $action, $middleware);
+        self::add(['get', 'post', 'put', 'patch', 'options', 'delete'], $uri, $action, $middleware);
     }
     
     /**
