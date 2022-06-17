@@ -2,7 +2,6 @@
 
 namespace App\Core\Routing;
 
-use Exception;
 use App\Core\Request;
 use App\Core\Routing\Route;
 use App\Exceptions\ClassNotFoundException;
