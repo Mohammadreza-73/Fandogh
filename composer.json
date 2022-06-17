@@ -1,6 +1,12 @@
 {
     "name": "mohammadreza/micro-framework",
-    "description": "Micro-Framework Project",
+    "description": "Fandogh Micro-Framework Project",
+    "keywords": [
+        "php",
+        "Framework",
+        "mvc"
+    ],
+    "homepage": "https://github.com/Mohammadreza-73/Fandogh",
     "type": "project",
     "license": "MIT",
     "authors": [
