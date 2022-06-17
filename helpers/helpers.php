@@ -54,13 +54,17 @@ if (! function_exists('view') )
      */
     function view(string $path, array $data = []): void
     {
-        if (! file_exists($path) )
-            throw new \App\Exceptions\FileNotFoundException(
-                "Failed to open stream, No such file or directory for view [$path]"
-            );
-
+        
         extract($data);
         $path = str_replace('.', '/', $path);
+        // $fileName = __DIR__ . "/views/{$path}.php";
+
+        // if (! file_exists($fileName) ) {
+        //     throw new \App\Exceptions\FileNotFoundException(
+        //         "Failed to open stream, No such file or directory for view [$path]"
+        //     );
+        // }
+
         include BASE_PATH . "/views/{$path}.php";
         die();
     }
@@ -78,5 +82,26 @@ if (! function_exists('dd') )
     {
         var_dump($value);
         die();
+    }
+}
+
+
+if (! function_exists('strContains'))
+{
+    /**
+     * Check substring for string existance.
+     *
+     * @param string $str
+     * @param string $needle
+     * @param integer $case_sensitive
+     * @return boolean
+     */
+    function strContains(string $str, string $needle, $case_sensitive = 0): bool
+    {
+        ($case_sensitive)
+            ? $pos = strpos($str, $needle)
+            : $pos = stripos($str, $needle);
+
+        return ($pos !== false) ? true : false;
     }
 }
