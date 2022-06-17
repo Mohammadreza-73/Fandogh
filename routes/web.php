@@ -11,7 +11,7 @@ Route::add(['get'], '/null');
 
 Route::get('/home', ['HomeController', 'index']);
 
-Route::get('/post/{slug}', 'PostController@single');
+Route::get('/post/{slug}/comment/{cid}', 'PostController@single');
 
 Route::get('/order', 'HomeController@order');
 

@@ -85,6 +85,12 @@ class Router
         $this->dispatch($this->currentRoute, $this->parameters);
     }
 
+    /**
+     * Check for uri match.
+     *
+     * @param array $route
+     * @return boolean
+     */
     private function isUriMatched(array $route): bool
     {
         $pattern = '/^' . str_replace(['/', '{', '}'], ['\/', '(?<', '>[-%\w]+)'], $route['uri']) . '$/';
@@ -92,14 +98,13 @@ class Router
 
         if (!$result)
             return false;
-        
+
         foreach ($matches as $key => $value)
         {
             if (! is_int($key) ) {
-                # Which controller is
-                # Make instance from specific controller
-                # Pass variable to method
-                $this->dispatch($this->currentRoute, [$this->parameters]);
+                $this->parameters[$key] = $value;
+                
+                $this->dispatch($this->currentRoute, $this->parameters);
             }
         }
 
@@ -199,8 +204,7 @@ class Router
 
         /** action: closure */
         if ( is_callable($action) ) {
-            $action($this->parameters);
-            // call_user_func($action);
+            $action(...$parameters);
         }
         
         /** action: 'controller@method' */
@@ -220,7 +224,7 @@ class Router
             if (! method_exists($className, $method) )
                 throw new MethodNotFoundException("Method [$method] Not Exists in Class $className!");
 
-            $controller->{$method}($this->parameters);
+            $controller->{$method}(...$parameters);
         }
     }
 }
