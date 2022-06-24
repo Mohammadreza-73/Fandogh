@@ -16,9 +16,9 @@ interface CrudInterface
      * Find record in database.
      *
      * @param integer $id
-     * @return object specific record
+     * @return object|null specific record
      */
-    public function find(int $id): object;
+    public function find(int $id): ?object;
 
     /**
      * Get records from database.
