@@ -49,7 +49,7 @@ class MysqlBaseModel extends BaseModel
 
     public function find(int $id): ?object
     {
-        return null;
+        return (object) $this->connection->get($this->table, '*', [$this->primary_key => $id]);
     }
 
     public function get(array|string $columns, ?array $where = null): array
@@ -57,13 +57,17 @@ class MysqlBaseModel extends BaseModel
         return $this->connection->select($this->table, $columns, $where);
     }
 
-    public function update(array $data, array $where): int
+    public function update(array $data, ?array $where = null): int
     {
-        return 1;
+        $data = $this->connection->update($this->table, $data, $where);
+
+        return $data->rowCount();
     }
 
     public function delete(array $where): int
     {
-        return 1;
+        $data = $this->connection->delete($this->table, $where);
+
+        return $data->rowCount();
     }
 }

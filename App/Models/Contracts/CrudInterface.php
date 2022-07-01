@@ -33,10 +33,10 @@ interface CrudInterface
      * Update records.
      *
      * @param array $data
-     * @param array $where
+     * @param array|null $where
      * @return integer affected records
      */
-    public function update(array $data, array $where): int;
+    public function update(array $data, ?array $where = null): int;
 
     /**
      * Delete specific records.
