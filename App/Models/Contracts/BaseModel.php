@@ -7,7 +7,7 @@ abstract class BaseModel implements CrudInterface
     /**
      * Database connection.
      *
-     * @var string
+     * @var object
      */
     protected $connection;
 

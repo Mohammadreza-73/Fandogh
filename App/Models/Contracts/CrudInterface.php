@@ -23,11 +23,11 @@ interface CrudInterface
     /**
      * Get records from database.
      *
-     * @param array $columns
-     * @param array $where
+     * @param array|string $columns
+     * @param array|null $where
      * @return array records
      */
-    public function get(array $columns, array $where): array;
+    public function get(array|string $columns, ?array $where = null): array;
 
     /**
      * Update records.
