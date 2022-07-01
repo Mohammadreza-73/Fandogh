@@ -17,7 +17,8 @@
     ],
     "require": {
         "vlucas/phpdotenv": "^5.3",
-        "catfan/medoo": "^2.1"
+        "catfan/medoo": "^2.1",
+        "hisorange/browser-detect": "^4.5"
     },
     "autoload": {
         "psr-4": {
