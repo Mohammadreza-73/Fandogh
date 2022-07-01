@@ -58,4 +58,9 @@ abstract class BaseModel implements CrudInterface
 
         return $this->attributes[$key];
     }
+
+    public function __get(string $key)
+    {
+        return $this->getAttributes($key);
+    }
 }
