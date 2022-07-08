@@ -63,4 +63,12 @@ abstract class BaseModel implements CrudInterface
     {
         return $this->getAttributes($key);
     }
+
+    public function __set(string $key, $value)
+    {
+        if (! array_key_exists($key, $this->attributes))
+            return null;
+
+        $this->attributes[$key] = $value;
+    }
 }
