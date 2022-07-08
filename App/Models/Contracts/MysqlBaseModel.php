@@ -52,6 +52,26 @@ class MysqlBaseModel extends BaseModel
         return (object) $this->connection->get($this->table, '*', [$this->primary_key => $id]);
     }
 
+    /**
+     * Find a record or throw exception.
+     *
+     * @param integer $id
+     * @throws InvalidArgumentException
+     * @return object
+     */
+    public function findOrFail(int $id): object
+    {
+        $data = $this->connection->get($this->table, '*', [$this->primary_key => $id]);
+        
+        if (! isset($data)) {
+            throw new \InvalidArgumentException(
+                "Record with id: {$id} does not exist."
+            );
+        }
+
+        return (object) $data;
+    }
+
     public function get(array|string $columns, ?array $where = null): array
     {
         return $this->connection->select($this->table, $columns, $where);
@@ -69,5 +89,18 @@ class MysqlBaseModel extends BaseModel
         $data = $this->connection->delete($this->table, $where);
 
         return $data->rowCount();
+    }
+
+    /**
+     * Delete a record by id.
+     *
+     * @param integer $id
+     * @return integer affected row
+     */
+    public function remove(int $id): int
+    {
+        $id = $this->findOrFail($id)->id;
+
+        return $this->delete(['id' => $id]);
     }
 }
