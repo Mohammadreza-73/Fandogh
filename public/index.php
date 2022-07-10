@@ -1,6 +1,6 @@
 <?php
 
-include "bootstrap/init.php";
+require_once '../bootstrap/init.php';
 
 use App\Core\Routing\Router;
 
