@@ -1,4 +1,6 @@
 /vendor/
 /.env
-/.env.example
+.env.backup
 /.editorconfig
+/.idea
+/.vscode
