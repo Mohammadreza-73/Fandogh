@@ -10,6 +10,6 @@ class BlockFirefox implements MiddlewareInterface
     public function handle()
     {
         if (Browser::isFirefox())
-            die('FireFox is Blocked');
+            return view('errors.block');
     }
 }

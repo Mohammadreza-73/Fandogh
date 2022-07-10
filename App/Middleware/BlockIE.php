@@ -10,6 +10,6 @@ class BlockIE implements MiddlewareInterface
     public function handle()
     {
         if (Browser::isIE())
-            die('Internet Explorer is Blocked!');
+            return view('errors.block');
     }
 }
