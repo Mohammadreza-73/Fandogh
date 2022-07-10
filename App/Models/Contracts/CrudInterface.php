@@ -18,7 +18,7 @@ interface CrudInterface
      * @param integer $id
      * @return object|null specific record
      */
-    public function find(int $id): ?object;
+    public function find(int $id): ?self;
 
     /**
      * Get records from database.

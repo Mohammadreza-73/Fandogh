@@ -47,9 +47,19 @@ class MysqlBaseModel extends BaseModel
         return $this->connection->id();
     }
 
-    public function find(int $id): ?object
+    public function find(int $id): ?self
     {
-        return (object) $this->connection->get($this->table, '*', [$this->primary_key => $id]);
+        $data = $this->connection->get($this->table, '*', [$this->primary_key => $id]);
+
+        if (is_null($data)) {
+            return null;
+        }
+
+        foreach ($data as $col => $val) {
+            $this->attributes[$col] = $val;
+        }
+
+        return $this;
     }
 
     /**
@@ -57,9 +67,9 @@ class MysqlBaseModel extends BaseModel
      *
      * @param integer $id
      * @throws InvalidArgumentException
-     * @return object
+     * @return self
      */
-    public function findOrFail(int $id): object
+    public function findOrFail(int $id): self
     {
         $data = $this->connection->get($this->table, '*', [$this->primary_key => $id]);
         
@@ -69,7 +79,11 @@ class MysqlBaseModel extends BaseModel
             );
         }
 
-        return (object) $data;
+        foreach ($data as $col => $val) {
+            $this->attributes[$col] = $val;
+        }
+
+        return $this;
     }
 
     public function get(array|string $columns, ?array $where = null): array
@@ -92,15 +106,27 @@ class MysqlBaseModel extends BaseModel
     }
 
     /**
-     * Delete a record by id.
+     * Delete a record.
      *
-     * @param integer $id
-     * @return integer affected row
+     * @return integer Affected row(s)
      */
-    public function remove(int $id): int
+    public function remove(): int
     {
-        $id = $this->findOrFail($id)->id;
+        $id = $this->{$this->primary_key};
+        
+        return $this->delete([$this->primary_key => $id]);
+    }
 
-        return $this->delete(['id' => $id]);
+    /**
+     * Update a record attribute(s).
+     *
+     * @return self
+     */
+    public function save(): self
+    {
+        $id = $this->{$this->primary_key};
+        $this->update($this->attributes, [$this->primary_key => $id]);
+
+        return $this->find($id);
     }
 }
