@@ -15,23 +15,23 @@ class MysqlBaseModel extends BaseModel
             'database' => $_ENV['DB_DATABASE'],
             'username' => $_ENV['DB_USERNAME'],
             'password' => $_ENV['DB_PASSWORD'],
-            
+
             'charset' => $_ENV['DB_CHARSET'],
             'collation' => 'utf8mb4_general_ci',
             'port' => $_ENV['DB_PORT'],
-            
+
             'prefix' => $_ENV['DB_PREFIX'],
             'logging' => $_ENV['DB_LOGGING'],
-            
+
             /**
              * @example PDO::ERRMODE_SILENT (default) | PDO::ERRMODE_WARNING | PDO::ERRMODE_EXCEPTION
              * @see Read more from https://www.php.net/manual/en/pdo.error-handling.php.
              */
             'error' => \PDO::ERRMODE_EXCEPTION,
-            
+
             /**
              * The driver_option for connection.
-             * 
+             *
              * @see Read more from http://www.php.net/manual/en/pdo.setattribute.php.
              */
             'option' => [
@@ -72,7 +72,7 @@ class MysqlBaseModel extends BaseModel
     public function findOrFail(int $id): self
     {
         $data = $this->connection->get($this->table, '*', [$this->primary_key => $id]);
-        
+
         if (! isset($data)) {
             throw new \InvalidArgumentException(
                 "Record with id: {$id} does not exist."
@@ -113,7 +113,7 @@ class MysqlBaseModel extends BaseModel
     public function remove(): int
     {
         $id = $this->{$this->primary_key};
-        
+
         return $this->delete([$this->primary_key => $id]);
     }
 

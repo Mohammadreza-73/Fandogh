@@ -26,7 +26,7 @@ class StupidRouter
                 $this->includeView(BASE_PATH . $views);
             }
         }
-        
+
         $this->setHeader('Not Found', 404);
         $this->includeView(BASE_PATH . '/views/errors/404.php');
     }

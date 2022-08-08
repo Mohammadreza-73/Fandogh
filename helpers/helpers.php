@@ -1,7 +1,6 @@
 <?php
 
-if (! function_exists('siteUrl') )
-{
+if (! function_exists('siteUrl')) {
     /**
      * Generate Custom URL
      *
@@ -14,8 +13,7 @@ if (! function_exists('siteUrl') )
     }
 }
 
-if (! function_exists('assetsUrl') )
-{
+if (! function_exists('assetsUrl')) {
     /**
      * Retrieve asset URL
      *
@@ -28,8 +26,7 @@ if (! function_exists('assetsUrl') )
     }
 }
 
-if (! function_exists('randomElement') )
-{
+if (! function_exists('randomElement')) {
     /**
      * Retrieve random index of array
      *
@@ -39,22 +36,21 @@ if (! function_exists('randomElement') )
     function randomElement(array $array): string
     {
         shuffle($array);
+
         return array_pop($array);
     }
 }
 
-if (! function_exists('view') )
-{
+if (! function_exists('view')) {
     /**
      * Get the evaluated view contents for the given view.
-     * 
+     *
      * @param  string $path
      * @param  array  $data  Accessible variables in view
      * @return void
      */
     function view(string $path, array $data = []): void
     {
-        
         extract($data);
         $path = str_replace('.', '/', $path);
         // $fileName = __DIR__ . "/views/{$path}.php";
@@ -70,8 +66,7 @@ if (! function_exists('view') )
     }
 }
 
-if (! function_exists('dd') )
-{
+if (! function_exists('dd')) {
     /**
      * Die and Dump
      *
@@ -86,8 +81,7 @@ if (! function_exists('dd') )
 }
 
 
-if (! function_exists('strContains'))
-{
+if (! function_exists('strContains')) {
     /**
      * Check substring for string existance.
      *

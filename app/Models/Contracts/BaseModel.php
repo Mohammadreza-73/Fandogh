@@ -41,7 +41,6 @@ abstract class BaseModel implements CrudInterface
 
     protected function __construct()
     {
-
     }
 
     /**
@@ -66,8 +65,9 @@ abstract class BaseModel implements CrudInterface
 
     public function __set(string $key, $value)
     {
-        if (! array_key_exists($key, $this->attributes))
+        if (! array_key_exists($key, $this->attributes)) {
             return null;
+        }
 
         $this->attributes[$key] = $value;
     }

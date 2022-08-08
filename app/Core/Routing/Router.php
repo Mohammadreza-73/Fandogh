@@ -37,7 +37,7 @@ class Router
 
     /**
      * Initiaize Properties
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -47,8 +47,8 @@ class Router
         $this->currentRoute = $this->findRoute($this->request);
 
         /** Middlewares */
-         $this->middleware();
-         $this->globalMiddleware();
+        $this->middleware();
+        $this->globalMiddleware();
     }
 
     /**
@@ -60,13 +60,15 @@ class Router
     public function findRoute(Request $request): ?array
     {
         foreach ($this->routes as $route) {
-            if (! in_array($request->method, $route['methods']) )
+            if (! in_array($request->method, $route['methods'])) {
                 return null;
+            }
 
-            if ( $this->isUriMatched($route) )
+            if ($this->isUriMatched($route)) {
                 return $route;
+            }
         }
-        
+
         return null;
     }
 
@@ -79,8 +81,9 @@ class Router
     {
         $this->invalidRequestMehtod($this->request);
 
-        if ( null === $this->currentRoute )
+        if (null === $this->currentRoute) {
             $this->dispatch404();
+        }
 
         $this->dispatch($this->currentRoute, $this->parameters);
     }
@@ -96,14 +99,14 @@ class Router
         $pattern = '/^' . str_replace(['/', '{', '}'], ['\/', '(?<', '>[-%\w]+)'], $route['uri']) . '$/';
         $result = preg_match($pattern, $this->request->uri, $matches);
 
-        if (!$result)
+        if (!$result) {
             return false;
+        }
 
-        foreach ($matches as $key => $value)
-        {
-            if (! is_int($key) ) {
+        foreach ($matches as $key => $value) {
+            if (! is_int($key)) {
                 $this->parameters[$key] = $value;
-                
+
                 $this->dispatch($this->currentRoute, $this->parameters);
             }
         }
@@ -131,17 +134,21 @@ class Router
      */
     private function middleware(): void
     {
-        if (null === $this->currentRoute) return;
+        if (null === $this->currentRoute) {
+            return;
+        }
 
         $middlewares = $this->currentRoute['middleware'];
         foreach ($middlewares as $middleware) {
-            if (! class_exists($middleware) )
+            if (! class_exists($middleware)) {
                 throw new ClassNotFoundException("Middleware [$middleware] Not Exists");
+            }
 
             $className = new $middleware();
 
-            if (! method_exists($className, 'handle') )
+            if (! method_exists($className, 'handle')) {
                 throw new MethodNotFoundException("Middleware should implements `MiddlewareInterface`");
+            }
 
             $className->handle();
         }
@@ -156,9 +163,8 @@ class Router
     private function invalidRequestMehtod(Request $request): void
     {
         foreach ($this->routes as $route) {
-            if ( $request->uri === $route['uri'] && 
-                ! in_array($request->method, $route['methods']) )
-            {
+            if ($request->uri === $route['uri'] &&
+                ! in_array($request->method, $route['methods'])) {
                 $this->dispatch405();
             }
         }
@@ -199,30 +205,34 @@ class Router
         $action = $route['action'] ?? null;
 
         /**  action: null */
-        if ( is_null($action) || empty($action) )
+        if (is_null($action) || empty($action)) {
             return;
+        }
 
         /** action: closure */
-        if ( is_callable($action) ) {
+        if (is_callable($action)) {
             $action(...$parameters);
         }
-        
+
         /** action: 'controller@method' */
-        if ( is_string($action) )
+        if (is_string($action)) {
             $action = explode('@', $action);
+        }
 
         /** action: ['controller', 'method'] */
-        if ( is_array($action) ) {
+        if (is_array($action)) {
             $className = self::BASE_CONTROLLER . $action[0];
             $method = $action[1];
 
-            if (! class_exists($className) )
+            if (! class_exists($className)) {
                 throw new ClassNotFoundException("Class [$className] Not Exists!");
-            
+            }
+
             $controller = new $className();
 
-            if (! method_exists($className, $method) )
+            if (! method_exists($className, $method)) {
                 throw new MethodNotFoundException("Method [$method] Not Exists in Class $className!");
+            }
 
             $controller->{$method}(...$parameters);
         }

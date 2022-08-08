@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Core;
+
 class Request
 {
     private array $request_data = [];
 
     /**
      * Initialize `request_data` Property.
-     * 
+     *
      * @return void
      */
     public function __construct()
@@ -39,8 +40,9 @@ class Request
      */
     public function getRequestParams(string $key = 'params', string $params_key = null)
     {
-        if ( isset($params_key) )
+        if (isset($params_key)) {
             return $this->request_data[$key][$params_key] ?? null;
+        }
 
         return $this->request_data[$key] ?? null;
     }
@@ -53,15 +55,16 @@ class Request
      */
     public function isset(string $key = 'params', string $params_key = null): bool
     {
-        if ( isset($params_key) )
+        if (isset($params_key)) {
             return $this->request_data[$key][$params_key] ?? false;
-        
+        }
+
         return isset($this->request_data[$key]);
     }
 
     /**
      * Redirect to a route
-     * 
+     *
      * NOTE: this is not for redirecting to url
      *
      * @param  string $route

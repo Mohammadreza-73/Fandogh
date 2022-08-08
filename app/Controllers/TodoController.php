@@ -6,7 +6,7 @@ class TodoController
 {
     public function list()
     {
-        /** INSTANSLY: Get Data from DB */       
+        /** INSTANSLY: Get Data from DB */
         $data = [
             'tasks' => [
                 'First Task',
@@ -17,7 +17,7 @@ class TodoController
             ],
             'title' => 'لیست کارها'
         ];
-        
+
         view('todo.list', $data);
     }
 }
