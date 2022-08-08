@@ -119,7 +119,7 @@ class Route
     {
         self::add(['get', 'post', 'put', 'patch', 'options', 'delete'], $uri, $action, $middleware);
     }
-    
+
     /**
      * Get Array Routes
      *

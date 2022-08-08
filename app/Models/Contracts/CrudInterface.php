@@ -6,7 +6,7 @@ interface CrudInterface
 {
     /**
      * Insert data to database.
-     * 
+     *
      * @param array $data
      * @return integer last inserted id
      */

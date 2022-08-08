@@ -16,19 +16,20 @@ class Url
 
     /**
      * Parse current URL and return its components
-     * 
+     *
      * component: retrieve just a specific URL component as a string
-     * 
+     *
      * like: PHP_URL_SCHEME, PHP_URL_HOST, PHP_URL_PORT, PHP_URL_USER,
      *       PHP_URL_PASS, PHP_URL_PATH, PHP_URL_QUERY or PHP_URL_FRAGMENT
-     * 
+     *
      * @param string $components
      * @return void
      */
     public static function segments(string $component = null)
     {
-        if ( !isset($component) )
+        if (!isset($component)) {
             return parse_url(self::current());
+        }
 
         return parse_url(self::current(), $component);
     }

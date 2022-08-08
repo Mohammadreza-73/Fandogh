@@ -9,7 +9,8 @@ class BlockIE implements MiddlewareInterface
 {
     public function handle()
     {
-        if (Browser::isIE())
+        if (Browser::isIE()) {
             return view('errors.block');
+        }
     }
 }

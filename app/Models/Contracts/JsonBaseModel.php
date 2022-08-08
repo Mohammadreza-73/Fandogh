@@ -26,7 +26,7 @@ class JsonBaseModel extends BaseModel
         $json_data = $this->getFileContents();
         $json_data[] = $data;
         $this->putFileContents($json_data);
-        
+
         return $data[$this->primary_key];
     }
 
@@ -35,7 +35,9 @@ class JsonBaseModel extends BaseModel
         $json_data = $this->getFileContents();
 
         foreach ($json_data as $object) {
-            if ($object->{$this->primary_key} === $id) return $object;
+            if ($object->{$this->primary_key} === $id) {
+                return $object;
+            }
         }
 
         return null;
@@ -64,7 +66,6 @@ class JsonBaseModel extends BaseModel
     private function getFileContents(): array
     {
         return json_decode(file_get_contents($this->json_file_path));
-
     }
 
     private function putFileContents(array $json_data)
