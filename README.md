@@ -12,3 +12,16 @@
     <a href="https://github.styleci.io/repos/400930505?branch=master"><img src="https://github.styleci.io/repos/400930505/shield?branch=master" alt="StyleCI"></a>
     <a href="https://packagist.org/packages/m.rahimi/fandogh"><img src="https://img.shields.io/packagist/l/m.rahimi/fandogh" alt="License"></a>
 </p>
+
+Fandogh is a web application framework with expressive, elegant syntax.
+
+----
+## ⬇️ Installation
+You can install the package via the composer:
+```
+composer create-project m.rahimi/fandogh
+```
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
