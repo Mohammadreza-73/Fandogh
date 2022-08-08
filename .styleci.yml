@@ -1,0 +1,4 @@
+preset: psr12
+
+enable:
+  - blank_line_before_return
