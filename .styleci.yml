@@ -1,4 +1,4 @@
 preset: psr12
 
-enable:
+enabled:
   - blank_line_before_return
