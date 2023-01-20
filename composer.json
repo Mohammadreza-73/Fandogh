@@ -8,7 +8,8 @@
     ],
     "homepage": "https://github.com/Mohammadreza-73/Fandogh",
     "support": {
-        "issues": "https://github.com/Mohammadreza-73/Fandogh/issues"
+        "issues": "https://github.com/Mohammadreza-73/Fandogh/issues",
+        "source": "https://github.com/Mohammadreza-73/Fandogh"
     },
     "type": "project",
     "license": "MIT",
@@ -21,7 +22,8 @@
     "require": {
         "vlucas/phpdotenv": "^5.3",
         "catfan/medoo": "^2.1",
-        "hisorange/browser-detect": "^4.5"
+        "hisorange/browser-detect": "^4.5",
+        "filp/whoops": "^2.14"
     },
     "autoload": {
         "psr-4": {
@@ -35,5 +37,7 @@
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ]
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
