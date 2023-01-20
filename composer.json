@@ -20,10 +20,12 @@
         }
     ],
     "require": {
+        "php": "^8.0",
         "vlucas/phpdotenv": "^5.3",
         "catfan/medoo": "^2.1",
         "hisorange/browser-detect": "^4.5",
-        "filp/whoops": "^2.14"
+        "filp/whoops": "^2.14",
+        "symfony/var-dumper": "^5.4"
     },
     "autoload": {
         "psr-4": {
