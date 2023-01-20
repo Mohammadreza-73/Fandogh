@@ -33,7 +33,7 @@ class Router
 
     private $parameters = [];
 
-    private const BASE_CONTROLLER = 'App\Controllers\\';
+    private const BASE_CONTROLLER = 'App\Http\Controllers\\';
 
     /**
      * Initiaize Properties

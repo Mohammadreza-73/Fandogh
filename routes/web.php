@@ -1,7 +1,7 @@
 <?php
 
 use App\Core\Routing\Route;
-use App\Middleware\BlockFirefox;
+use App\Http\Middleware\BlockIE;
 
 Route::get('/', function () {
     return view('welcome');
@@ -9,4 +9,4 @@ Route::get('/', function () {
 
 Route::get('/post/{slug}/comment/{cid}', 'PostController@single');
 
-Route::get('/todo/list', 'TodoController@list', [BlockFirefox::class]);
+Route::get('/todo/list', 'TodoController@list', [BlockIE::class]);
