@@ -2,6 +2,7 @@
 
 namespace App\Core\Routing;
 
+use Closure;
 use App\Core\Request;
 use App\Core\Routing\Route;
 use App\Exceptions\ClassNotFoundException;
@@ -210,7 +211,7 @@ class Router
         }
 
         /** action: closure */
-        if (is_callable($action)) {
+        if (is_callable($action) && $action instanceof Closure) {
             $action(...$parameters);
         }
 

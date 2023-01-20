@@ -7,6 +7,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/post/{slug}/comment/{cid}', 'PostController@single');
+Route::get('/post/{slug}', 'PostController@index');
 
 Route::get('/todo/list', 'TodoController@list', [BlockIE::class]);
