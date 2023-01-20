@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Middleware;
+namespace App\Http\Middleware;
 
 use hisorange\BrowserDetect\Parser as Browser;
-use App\Middleware\Contract\MiddlewareInterface;
+use App\Http\Middleware\Contract\MiddlewareInterface;
 
 class BlockFirefox implements MiddlewareInterface
 {

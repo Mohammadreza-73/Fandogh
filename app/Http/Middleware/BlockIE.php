@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Middleware;
+namespace App\Http\Middleware;
 
-use App\Middleware\Contract\MiddlewareInterface;
 use hisorange\BrowserDetect\Parser as Browser;
+use App\Http\Middleware\Contract\MiddlewareInterface;
 
 class BlockIE implements MiddlewareInterface
 {

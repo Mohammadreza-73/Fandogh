@@ -6,7 +6,7 @@ use App\Core\Request;
 use App\Core\Routing\Route;
 use App\Exceptions\ClassNotFoundException;
 use App\Exceptions\MethodNotFoundException;
-use App\Middleware\Global\GlobalMiddleware;
+use App\Http\Middleware\Middleware as GlobalMiddleware;
 
 class Router
 {

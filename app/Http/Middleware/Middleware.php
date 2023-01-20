@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Middleware\Global;
+namespace App\Http\Middleware;
 
 use Exception;
-use App\Middleware\BlockIE;
-use App\Middleware\BlockFirefox;
+use App\Http\Middleware\BlockIE;
+use App\Http\Middleware\BlockFirefox;
 use App\Exceptions\ClassNotFoundException;
 use App\Exceptions\MethodNotFoundException;
-use App\Middleware\Contract\MiddlewareInterface;
+use App\Http\Middleware\Contract\MiddlewareInterface;
 
-class GlobalMiddleware implements MiddlewareInterface
+class Middleware implements MiddlewareInterface
 {
     /**
      * Global Middlewares
