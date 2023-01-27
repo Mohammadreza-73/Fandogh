@@ -1,6 +1,8 @@
-/vendor/
-/.env
-.env.backup
-/.editorconfig
 /.idea
 /.vscode
+/.env
+/.editorconfig
+.env.backup
+/vendor/
+upload
+.phpunit.result.cache

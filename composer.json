@@ -21,10 +21,15 @@
     ],
     "require": {
         "php": "^8.0",
+        "ext-pdo": "*",
+        "ext-json": "*",
         "vlucas/phpdotenv": "^5.3",
         "catfan/medoo": "^2.1",
         "hisorange/browser-detect": "^4.5",
-        "filp/whoops": "^2.14",
+        "filp/whoops": "^2.14"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
         "symfony/var-dumper": "^5.4"
     },
     "autoload": {
@@ -35,10 +40,16 @@
             "helpers/helpers.php"
         ]
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "scripts": {
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ]
+        ],
+        "test": "vendor/bin/phpunit"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
