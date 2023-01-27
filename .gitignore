@@ -5,4 +5,4 @@
 .env.backup
 /vendor/
 upload
-.phpunit.result.cache
+.phpunit.cache
