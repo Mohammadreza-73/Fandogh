@@ -10,18 +10,18 @@ class MysqlBaseModel extends BaseModel
     public function __construct()
     {
         $this->connection = new Medoo([
-            'type' => $_ENV['DB_CONNECTION'],
-            'host' => $_ENV['DB_HOST'],
-            'database' => $_ENV['DB_DATABASE'],
-            'username' => $_ENV['DB_USERNAME'],
-            'password' => $_ENV['DB_PASSWORD'],
+            'type' => env('DB_CONNECTION'),
+            'host' => env('DB_HOST'),
+            'database' => env('DB_DATABASE'),
+            'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
 
-            'charset' => $_ENV['DB_CHARSET'],
-            'collation' => 'utf8mb4_general_ci',
-            'port' => $_ENV['DB_PORT'],
+            'charset' => env('DB_CHARSET'),
+            'collation' => 'utf8_general_ci',
+            'port' => env('DB_PORT'),
 
-            'prefix' => $_ENV['DB_PREFIX'],
-            'logging' => $_ENV['DB_LOGGING'],
+            'prefix' => env('DB_PREFIX'),
+            'logging' => env('DB_LOGGING'),
 
             /**
              * @example PDO::ERRMODE_SILENT (default) | PDO::ERRMODE_WARNING | PDO::ERRMODE_EXCEPTION

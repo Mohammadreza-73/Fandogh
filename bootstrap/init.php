@@ -1,9 +1,9 @@
 <?php
 
 include "constants.php";
-include BASE_PATH . "/vendor/autoload.php";
+include BASE_PATH . ('/vendor/autoload.php');
 
-$dotenv = Dotenv\Dotenv::createImmutable(BASE_PATH);
+$dotenv = Dotenv\Dotenv::createImmutable(base_path());
 $dotenv->load();
 
 $whoops = new \Whoops\Run;
@@ -12,4 +12,4 @@ $whoops->register();
 
 $request = new \App\Core\Request();
 
-include BASE_PATH . "/routes/web.php";
+include base_path('routes/web.php');
