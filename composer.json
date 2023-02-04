@@ -27,7 +27,8 @@
         "catfan/medoo": "^2.1",
         "hisorange/browser-detect": "^4.5",
         "filp/whoops": "^2.14",
-        "nesbot/carbon": "^2.66"
+        "nesbot/carbon": "^2.66",
+        "symfony/console": "^6.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",
