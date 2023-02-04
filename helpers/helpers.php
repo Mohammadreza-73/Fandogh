@@ -6,7 +6,7 @@ if (! function_exists('base_path')) {
     /**
      * Base path of project
      * 
-     * @param  string $path
+     * @param  string  $path
      * @return string the name of the directory
      */
     function base_path(string $path = ''): string
@@ -15,11 +15,24 @@ if (! function_exists('base_path')) {
     }
 }
 
+if (! function_exists('app_path')) {
+    /**
+     * App directroy path
+     *
+     * @param  string  $path
+     * @return string the name of the directory
+     */
+    function app_path(string $path = ''): string
+    {
+        return base_path('app') . DIRECTORY_SEPARATOR . $path;
+    }
+}
+
 if (! function_exists('storage_path')) {
     /**
      * Storage path of project
      * 
-     * @param  string $path
+     * @param  string  $path
      * @return string the name of the directory
      */
     function storage_path(string $path = ''): string
@@ -32,7 +45,7 @@ if (! function_exists('public_path')) {
     /**
      * Public path of project
      * 
-     * @param  string $path
+     * @param  string  $path
      * @return string the name of the directory
      */
     function public_path(string $path = ''): string
@@ -45,7 +58,7 @@ if (! function_exists('config_path')) {
     /**
      * Config path of project
      * 
-     * @param  string $path
+     * @param  string  $path
      * @return string the name of the directory
      */
     function config_path(string $path = ''): string
@@ -58,8 +71,8 @@ if (! function_exists('config')) {
     /**
      * Get config file
      * 
-     * @param  string $file_name
-     * @throws FileNotFoundException
+     * @param  string  $file_name
+     * @throws  FileNotFoundException
      * @return array Read intire file into a string
      */
     function config(string $file_name): array
@@ -74,53 +87,68 @@ if (! function_exists('config')) {
     }
 }
 
-if (! function_exists('appUrl')) {
+if (! function_exists('app_url')) {
     /**
      * Generate Custom URL
      *
-     * @param  string $route
+     * @param  string  $route
      * @return string
      */
-    function appUrl(string $route = ''): string
+    function app_url(string $route = ''): string
     {
         return env('BASE_URL') . "/$route";
     }
 }
 
-if (! function_exists('assetsUrl')) {
+if (! function_exists('assets')) {
     /**
      * Retrieve asset URL
      *
-     * @param  string $path
+     * @param  string  $path
      * @return string
      */
     function assets(string $path): string
     {
-        return appUrl('assets/' . $path);
+        return app_url('assets/' . $path);
     }
 }
 
-if (! function_exists('urlIs')) {
+if (! function_exists('is_url')) {
     /**
      * Check url value
      * 
-     * @param  string $value
+     * @param  string  $value
      * @return bool
      */
-    function urlIs(string $value): bool
+    function is_url(string $value): bool
     {
         return $_SERVER['REQUEST_URI'] === $value;
     }
 }
 
-if (! function_exists('randomElement')) {
+if (! function_exists('is_method')) {
+    /**
+     * Check request method
+     *
+     * @param  string  $method
+     * @return boolean
+     */
+    function is_method(string $method): bool
+    {
+        $method = strtoupper($method);
+
+        return $_SERVER['REQUEST_METHOD'] === $method;
+    }
+}
+
+if (! function_exists('random_element')) {
     /**
      * Retrieve random index of array
      *
-     * @param  array $array
+     * @param  array  $array
      * @return string
      */
-    function randomElement(array $array): string
+    function random_element(array $array): string
     {
         shuffle($array);
 
@@ -132,8 +160,8 @@ if (! function_exists('view')) {
     /**
      * Get the evaluated view contents for the given view.
      *
-     * @param  string $path
-     * @param  array  $data  Accessible variables in view
+     * @param  string  $path
+     * @param  array   $data  Accessible variables in view
      * @return void
      */
     function view(string $path, array $data = []): void
@@ -157,7 +185,7 @@ if (! function_exists('abort')) {
     /**
      * Abort request
      * 
-     * @param int $code http status code
+     * @param  int  $code http status code
      * @return string view
      */
     function abort(int $code = 404): string
@@ -169,11 +197,71 @@ if (! function_exists('abort')) {
     }
 }
 
+if (! function_exists('abort_unless')) {
+    /**
+     * Abort unless the condition is true
+     *
+     * @param boolean  $boolean
+     * @param integer  $code
+     * @return void
+     */
+    function abort_unless(bool $boolean, int $code = 404)
+    {
+        if (! $boolean) {
+            abort($code);
+        }
+    }
+}
+
+if (! function_exists('abort_if')) {
+    /**
+     * Abort with confition
+     *
+     * @param boolean  $boolean
+     * @param integer  $code
+     * @return void
+     */
+    function abort_if (bool $boolean, int $code = 404)
+    {
+        if ($boolean) {
+            abort($code);
+        }
+    }
+}
+
+if (! function_exists('bcrypt')) {
+    /**
+     * Creates a password hash
+     *
+     * @param  string  $value
+     * @param  array  $options
+     * @return string|false|null hashed password or false on failure or null on invalid algo
+     */
+    function bcrypt(string $value, array $options = [])
+    {
+        return password_hash($value, PASSWORD_BCRYPT, $options);
+    }
+}
+
+if (! function_exists('redirect')) {
+    /**
+     * Redirect to url
+     * 
+     * @param  string  $to
+     * @return void
+     */
+    function redirect(string $to)
+    {
+        header('Location: ' . $to);
+        die();
+    }
+}
+
 if (! function_exists('dd')) {
     /**
      * Die and Dump
      *
-     * @param  mixed $value
+     * @param  mixed  $value
      * @return void
      */
     function dd($value)
@@ -183,17 +271,16 @@ if (! function_exists('dd')) {
     }
 }
 
-
-if (! function_exists('strContains')) {
+if (! function_exists('str_contains')) {
     /**
      * Check substring for string existance.
      *
-     * @param string $str
-     * @param string $needle
-     * @param integer $case_sensitive
+     * @param  string  $str
+     * @param  string  $needle
+     * @param  integer  $case_sensitive
      * @return boolean
      */
-    function strContains(string $str, string $needle, $case_sensitive = 0): bool
+    function str_contains(string $str, string $needle, $case_sensitive = 0): bool
     {
         ($case_sensitive)
             ? $pos = strpos($str, $needle)
