@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use App\Exceptions\FileNotFoundException;
 
 if (! function_exists('base_path')) {
@@ -64,6 +65,19 @@ if (! function_exists('config_path')) {
     function config_path(string $path = ''): string
     {
         return dirname(__DIR__) . DIRECTORY_SEPARATOR . "configs/{$path}";
+    }
+}
+
+if (! function_exists('resource_path')) {
+    /**
+     * Resource path of project
+     * 
+     * @param  string  $path
+     * @return string the name of the directory
+     */
+    function resource_path(string $path = ''): string
+    {
+        return base_path('resources' . DIRECTORY_SEPARATOR . $path);
     }
 }
 
@@ -168,7 +182,7 @@ if (! function_exists('view')) {
     {
         extract($data);
         $path = str_replace('.', '/', $path);
-        $file = base_path("/views/{$path}.php");
+        $file = resource_path("/views/{$path}.php");
 
         if (! file_exists($file) ) {
             throw new FileNotFoundException(
@@ -178,6 +192,19 @@ if (! function_exists('view')) {
 
         require $file;
         die();
+    }
+}
+
+if (! function_exists('now')) {
+    /**
+     * Create a new Carbon instance for the current time
+     *
+     * @param  \DateTimeZone|string|null  $tz
+     * @return Carbon\Carbon Carbon instance
+     */
+    function now($tz = null, $format = 'Y-m-d H:i:s')
+    {
+        return Carbon::now($tz)->format($format);
     }
 }
 
