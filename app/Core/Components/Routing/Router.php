@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Core\Routing;
+namespace App\Core\Components\Routing;
 
 use Closure;
-use App\Core\Request;
-use App\Core\Routing\Route;
+use App\Core\Components\Http\Request;
+use App\Core\Components\Routing\Route;
 use App\Exceptions\ClassNotFoundException;
 use App\Exceptions\MethodNotFoundException;
 use App\Http\Middleware\Middleware as GlobalMiddleware;

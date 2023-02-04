@@ -1,6 +1,6 @@
 <?php
 
-use App\Core\Routing\Route;
+use App\Core\Components\Routing\Route;
 use App\Http\Middleware\BlockIE;
 
 Route::get('/', function () {

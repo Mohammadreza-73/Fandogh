@@ -1,7 +1,11 @@
 <?php
 
-namespace App\Core;
+namespace App\Core\Components\Http;
 
+/**
+ * Request Class
+ * @package App\Core\Components\Http\Request
+ */
 class Request
 {
     private array $request_data = [];
@@ -72,7 +76,7 @@ class Request
      */
     public function redirect(string $route): void
     {
-        header('Location: ' . siteUrl($route));
+        header('Location: ' . app_url($route));
         die();
     }
 

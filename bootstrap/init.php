@@ -10,6 +10,6 @@ $whoops = new \Whoops\Run;
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
 
-$request = new \App\Core\Request();
+$request = new \App\Core\Components\Http\Request();
 
 include base_path('routes/web.php');
