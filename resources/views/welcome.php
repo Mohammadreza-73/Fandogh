@@ -59,7 +59,7 @@
                     </div>
 
                     <div class="ml-4 text-center text-sm text-gray-500 sm:text-right sm:ml-0">
-                        (PHP v<?php echo PHP_VERSION; ?>)
+                        (PHP v<?= PHP_VERSION; ?>) v<?= APP_VERSION; ?>
                     </div>
                 </div>
             </div>
