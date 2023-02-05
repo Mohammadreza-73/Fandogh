@@ -4,7 +4,7 @@ namespace App\Core\Components\Http;
 
 /**
  * Request Class
- * @package App\Core\Components\Http\Request
+ * @package App\Core\Components\Http
  */
 class Request
 {

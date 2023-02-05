@@ -4,7 +4,7 @@ namespace App\Core\Components\Http;
 
 /**
  * Response Class
- * @package App\Core\Components\Http\Response
+ * @package App\Core\Components\Http
  */
 class Response
 {

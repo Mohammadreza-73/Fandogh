@@ -1,7 +1,7 @@
 <?php
 
-use App\Core\Components\Routing\Route;
 use App\Http\Middleware\BlockIE;
+use App\Core\Components\Routing\Route;
 
 Route::get('/', function () {
     return view('welcome');
