@@ -18,14 +18,16 @@ class Url
         $this->server = $_SERVER;
     }
 
-    public function getSchema(): string
+    public function getScheme(): string
     {
-        return strtolower(substr($this->server['SERVER_PROTOCOL'], 0, strpos($this->server['SERVER_PROTOCOL'], '/'))) . '://';
+        return isset($this->server['REQUEST_SCHEME'])
+            ? $this->server['REQUEST_SCHEME']
+            : strtolower(substr($this->server['SERVER_PROTOCOL'], 0, strpos($this->server['SERVER_PROTOCOL'], '/')));
     }
 
     public function base(): string
     {
-        $base = sprintf('%s%s', $this->getSchema(), $this->server['SERVER_NAME']);
+        $base = sprintf('%s%s', $this->getScheme() . '://', $this->server['SERVER_NAME']);
         $port = $this->port();
 
         if (isset($port)) {
