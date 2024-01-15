@@ -61,7 +61,7 @@ class Router
     public function findRoute(Request $request): ?array
     {
         foreach ($this->routes as $route) {
-            if (! in_array($request->method, $route['methods'])) {
+            if (!in_array($request->method, $route['methods'])) {
                 return null;
             }
 
@@ -105,7 +105,7 @@ class Router
         }
 
         foreach ($matches as $key => $value) {
-            if (! is_int($key)) {
+            if (!is_int($key)) {
                 $this->parameters[$key] = $value;
 
                 $this->dispatch($this->currentRoute, $this->parameters);
@@ -141,13 +141,13 @@ class Router
 
         $middlewares = $this->currentRoute['middleware'];
         foreach ($middlewares as $middleware) {
-            if (! class_exists($middleware)) {
+            if (!class_exists($middleware)) {
                 throw new ClassNotFoundException("Middleware [$middleware] Not Exists");
             }
 
             $className = new $middleware();
 
-            if (! method_exists($className, 'handle')) {
+            if (!method_exists($className, 'handle')) {
                 throw new MethodNotFoundException("Middleware should implements `MiddlewareInterface`");
             }
 
@@ -165,7 +165,7 @@ class Router
     {
         foreach ($this->routes as $route) {
             if ($request->uri === $route['uri'] &&
-                ! in_array($request->method, $route['methods'])) {
+                !in_array($request->method, $route['methods'])) {
                 $this->dispatch405();
             }
         }
@@ -225,13 +225,13 @@ class Router
             $className = self::BASE_CONTROLLER . $action[0];
             $method = $action[1];
 
-            if (! class_exists($className)) {
+            if (!class_exists($className)) {
                 throw new ClassNotFoundException("Class [$className] Not Exists!");
             }
 
             $controller = new $className();
 
-            if (! method_exists($className, $method)) {
+            if (!method_exists($className, $method)) {
                 throw new MethodNotFoundException("Method [$method] Not Exists in Class $className!");
             }
 

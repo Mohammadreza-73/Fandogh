@@ -58,7 +58,7 @@ class Redirect
     {
         $this->is_required_header = false;
 
-        if (! $this->fragment) {
+        if (!$this->fragment) {
             return $this->url . ($this->query ? "?$this->query" : null);
         }
 
@@ -72,9 +72,9 @@ class Redirect
 
     public function header()
     {
-        if (! headers_sent()) {
-            if (! $this->fragment) {
-                return header('location:' . $this->url . ($this->query ? "?$this->query": null));
+        if (!headers_sent()) {
+            if (!$this->fragment) {
+                return header('location:' . $this->url . ($this->query ? "?$this->query" : null));
             }
 
             return header('location:' . $this->url . ($this->query ? "?$this->query" : null) . $this->fragment);

@@ -30,13 +30,13 @@ class Middleware implements MiddlewareInterface
     public function handle(): void
     {
         foreach ($this->middlewares as $middleware) {
-            if (! class_exists($middleware)) {
+            if (!class_exists($middleware)) {
                 throw new ClassNotFoundException("Middleware [$middleware] Not Exists");
             }
 
             $globalMiddleware = new $middleware();
 
-            if (! method_exists($globalMiddleware, 'handle')) {
+            if (!method_exists($globalMiddleware, 'handle')) {
                 throw new MethodNotFoundException('Middleware should implements `GlobalMiddleware` interface');
             }
 

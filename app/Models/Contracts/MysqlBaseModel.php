@@ -73,7 +73,7 @@ class MysqlBaseModel extends BaseModel
     {
         $data = $this->connection->get($this->table, '*', [$this->primary_key => $id]);
 
-        if (! isset($data)) {
+        if (!isset($data)) {
             throw new \InvalidArgumentException(
                 "Record with id: {$id} does not exist."
             );

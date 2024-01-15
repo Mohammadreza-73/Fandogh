@@ -51,7 +51,7 @@ abstract class BaseModel implements CrudInterface
      */
     protected function getAttributes(string $key): ?string
     {
-        if (! isset($key) || ! array_key_exists($key, $this->attributes)) {
+        if (!isset($key) || !array_key_exists($key, $this->attributes)) {
             return null;
         }
 
@@ -65,7 +65,7 @@ abstract class BaseModel implements CrudInterface
 
     public function __set(string $key, $value)
     {
-        if (! array_key_exists($key, $this->attributes)) {
+        if (!array_key_exists($key, $this->attributes)) {
             return null;
         }
 

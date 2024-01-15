@@ -70,7 +70,7 @@ class Url
     {
         $array = [];
         foreach ($this->query() as $key => $value) {
-            if (! in_array($key, $except, true)) {
+            if (!in_array($key, $except, true)) {
                 $array[$key] = $value;
             }
         }
