@@ -226,7 +226,7 @@ class Response
 
     /**
      * Json encode
-     * 
+     *
      * @param  $data
      * @throws RuntimeException
      * @return string|null

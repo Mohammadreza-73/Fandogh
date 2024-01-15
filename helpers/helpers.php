@@ -3,10 +3,10 @@
 use Carbon\Carbon;
 use App\Exceptions\FileNotFoundException;
 
-if (! function_exists('base_path')) {
+if (!function_exists('base_path')) {
     /**
      * Base path of project
-     * 
+     *
      * @param  string  $path
      * @return string the name of the directory
      */
@@ -16,7 +16,7 @@ if (! function_exists('base_path')) {
     }
 }
 
-if (! function_exists('app_path')) {
+if (!function_exists('app_path')) {
     /**
      * App directroy path
      *
@@ -29,10 +29,10 @@ if (! function_exists('app_path')) {
     }
 }
 
-if (! function_exists('storage_path')) {
+if (!function_exists('storage_path')) {
     /**
      * Storage path of project
-     * 
+     *
      * @param  string  $path
      * @return string the name of the directory
      */
@@ -42,10 +42,10 @@ if (! function_exists('storage_path')) {
     }
 }
 
-if (! function_exists('public_path')) {
+if (!function_exists('public_path')) {
     /**
      * Public path of project
-     * 
+     *
      * @param  string  $path
      * @return string the name of the directory
      */
@@ -55,10 +55,10 @@ if (! function_exists('public_path')) {
     }
 }
 
-if (! function_exists('config_path')) {
+if (!function_exists('config_path')) {
     /**
      * Config path of project
-     * 
+     *
      * @param  string  $path
      * @return string the name of the directory
      */
@@ -68,10 +68,10 @@ if (! function_exists('config_path')) {
     }
 }
 
-if (! function_exists('resource_path')) {
+if (!function_exists('resource_path')) {
     /**
      * Resource path of project
-     * 
+     *
      * @param  string  $path
      * @return string the name of the directory
      */
@@ -81,10 +81,10 @@ if (! function_exists('resource_path')) {
     }
 }
 
-if (! function_exists('config')) {
+if (!function_exists('config')) {
     /**
      * Get config file
-     * 
+     *
      * @param  string  $file_name
      * @throws  FileNotFoundException
      * @return array Read intire file into a string
@@ -93,7 +93,7 @@ if (! function_exists('config')) {
     {
         $file = config_path($file_name) . '.php';
 
-        if (! file_exists($file)) {
+        if (!file_exists($file)) {
             throw new FileNotFoundException("Config file [$file] not found.");
         }
 
@@ -101,7 +101,7 @@ if (! function_exists('config')) {
     }
 }
 
-if (! function_exists('app_url')) {
+if (!function_exists('app_url')) {
     /**
      * Generate Custom URL
      *
@@ -114,7 +114,7 @@ if (! function_exists('app_url')) {
     }
 }
 
-if (! function_exists('assets')) {
+if (!function_exists('assets')) {
     /**
      * Retrieve asset URL
      *
@@ -127,10 +127,10 @@ if (! function_exists('assets')) {
     }
 }
 
-if (! function_exists('is_url')) {
+if (!function_exists('is_url')) {
     /**
      * Check url value
-     * 
+     *
      * @param  string  $value
      * @return bool
      */
@@ -140,7 +140,7 @@ if (! function_exists('is_url')) {
     }
 }
 
-if (! function_exists('is_method')) {
+if (!function_exists('is_method')) {
     /**
      * Check request method
      *
@@ -155,7 +155,7 @@ if (! function_exists('is_method')) {
     }
 }
 
-if (! function_exists('random_element')) {
+if (!function_exists('random_element')) {
     /**
      * Retrieve random index of array
      *
@@ -170,7 +170,7 @@ if (! function_exists('random_element')) {
     }
 }
 
-if (! function_exists('view')) {
+if (!function_exists('view')) {
     /**
      * Get the evaluated view contents for the given view.
      *
@@ -184,7 +184,7 @@ if (! function_exists('view')) {
         $path = str_replace('.', '/', $path);
         $file = resource_path("/views/{$path}.php");
 
-        if (! file_exists($file) ) {
+        if (!file_exists($file)) {
             throw new FileNotFoundException(
                 "Failed to open stream, No such file or directory for view [$path]"
             );
@@ -195,7 +195,7 @@ if (! function_exists('view')) {
     }
 }
 
-if (! function_exists('now')) {
+if (!function_exists('now')) {
     /**
      * Create a new Carbon instance for the current time
      *
@@ -208,10 +208,10 @@ if (! function_exists('now')) {
     }
 }
 
-if (! function_exists('abort')) {
+if (!function_exists('abort')) {
     /**
      * Abort request
-     * 
+     *
      * @param  int  $code http status code
      * @return string view
      */
@@ -224,7 +224,7 @@ if (! function_exists('abort')) {
     }
 }
 
-if (! function_exists('abort_unless')) {
+if (!function_exists('abort_unless')) {
     /**
      * Abort unless the condition is true
      *
@@ -234,13 +234,13 @@ if (! function_exists('abort_unless')) {
      */
     function abort_unless(bool $boolean, int $code = 404)
     {
-        if (! $boolean) {
+        if (!$boolean) {
             abort($code);
         }
     }
 }
 
-if (! function_exists('abort_if')) {
+if (!function_exists('abort_if')) {
     /**
      * Abort with confition
      *
@@ -248,7 +248,7 @@ if (! function_exists('abort_if')) {
      * @param integer  $code
      * @return void
      */
-    function abort_if (bool $boolean, int $code = 404)
+    function abort_if(bool $boolean, int $code = 404)
     {
         if ($boolean) {
             abort($code);
@@ -256,7 +256,7 @@ if (! function_exists('abort_if')) {
     }
 }
 
-if (! function_exists('bcrypt')) {
+if (!function_exists('bcrypt')) {
     /**
      * Creates a password hash
      *
@@ -270,10 +270,10 @@ if (! function_exists('bcrypt')) {
     }
 }
 
-if (! function_exists('redirect')) {
+if (!function_exists('redirect')) {
     /**
      * Redirect to url
-     * 
+     *
      * @param  string  $to
      * @return void
      */
@@ -284,7 +284,7 @@ if (! function_exists('redirect')) {
     }
 }
 
-if (! function_exists('dd')) {
+if (!function_exists('dd')) {
     /**
      * Die and Dump
      *
@@ -298,7 +298,7 @@ if (! function_exists('dd')) {
     }
 }
 
-if (! function_exists('str_contains')) {
+if (!function_exists('str_contains')) {
     /**
      * Check substring for string existance.
      *
@@ -317,7 +317,7 @@ if (! function_exists('str_contains')) {
     }
 }
 
-if (! function_exists('env')) {
+if (!function_exists('env')) {
     /**
      * Gets the value of an environment variable.
      *
