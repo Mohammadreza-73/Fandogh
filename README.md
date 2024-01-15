@@ -18,6 +18,12 @@ Fandogh is a web application framework with expressive, elegant syntax.
 This project adheres to [code of conduct](CODE_OF_CONDUCT.md). By participating in this project and its community, you are expected to uphold this code.
 
 ----
+
+## 📌Requirements
+ - PHP >= 8.0
+ - PDO Extension
+ - JSON Extension
+
 ## ⬇️ Installation
 You can install the package via the composer:
 ```
